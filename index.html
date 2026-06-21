@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Zodiac Queens</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#0f172a;
+    color:white;
+    text-align:center;
+}
+
+h1{
+    color:gold;
+}
+
+.board{
+    display:grid;
+    grid-template-columns:repeat(6,70px);
+    gap:2px;
+    justify-content:center;
+    margin-top:20px;
+}
+
+.cell{
+    width:70px;
+    height:70px;
+    font-size:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    border:1px solid #111;
+}
+
+.region0{background:#ef4444;}
+.region1{background:#f97316;}
+.region2{background:#eab308;}
+.region3{background:#22c55e;}
+.region4{background:#3b82f6;}
+.region5{background:#a855f7;}
+
+.valid{
+    outline:3px solid lime;
+}
+
+.invalid{
+    outline:3px solid red;
+}
+.firework{
+    position:fixed;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    pointer-events:none;
+
+    animation:
+    explode 1.5s ease-out forwards;
+}
+
+@keyframes explode{
+
+    0%{
+        transform:
+        translate(0,0)
+        scale(1);
+        opacity:1;
+    }
+
+    100%{
+        transform:
+        translate(
+            var(--x),
+            var(--y)
+        )
+        scale(0);
+        opacity:0;
+    }
+}
+
+.win-message{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:
+    translate(-50%,-50%);
+    font-size:48px;
+    font-weight:bold;
+    color:gold;
+    text-shadow:
+        0 0 10px gold,
+        0 0 30px gold,
+        0 0 50px gold;
+
+    animation:
+    zoomIn 0.6s ease;
+}
+
+@keyframes zoomIn{
+
+    from{
+        transform:
+        translate(-50%,-50%)
+        scale(0);
+    }
+
+    to{
+        transform:
+        translate(-50%,-50%)
+        scale(1);
+    }
+}
+
+@keyframes fall{
+    0%{
+        transform:translateY(0) rotate(0deg);
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(100vh) rotate(720deg);
+        opacity:0;
+    }
+}
+
+.win-message{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:48px;
+    font-weight:bold;
+    color:gold;
+    text-shadow:0 0 20px gold;
+    animation:pop 1s ease;
+}
+
+@keyframes pop{
+    0%{
+        transform:translate(-50%,-50%) scale(0);
+    }
+
+    100%{
+        transform:translate(-50%,-50%) scale(1);
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>✨ Zodiac Queens ✨</h1>
+<h2 id="levelTitle">♈ Aries</h2>
+<p>Place one zodiac symbol in every row, column and region.</p>
+
+<div id="board" class="board"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
