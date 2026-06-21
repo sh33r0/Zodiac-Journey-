@@ -232,7 +232,11 @@ function loadLevel(level){
     const zodiac =
     zodiacLevels[level];
 
-    document.body.style.background =`radial-gradient(circle, ${zodiac.bg}, #0f172a)`;
+    document.body.style.background =
+    `radial-gradient(circle at center,
+    #0f172a 0%,
+    #0f172a 45%,
+    ${zodiac.bg} 100%)`;
 
     document.getElementById(
         "levelTitle"
