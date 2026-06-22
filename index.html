@@ -3,254 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <title>Zodiac Queens</title>
-
-<style>
-body{
-    font-family:Arial,sans-serif;
-    color:white;
-    text-align:center;
-    transition: background 0.8s ease;
-
-    background:
-    radial-gradient(circle at center,
-        #0f172a 0%,
-        #0f172a 40%,
-        #5e1914 100%
-    );
-}
-
-h1{
-    color:gold;
-}
-#timer{
-    font-size:24px;
-    margin:10px;
-    color:gold;
-    font-weight:bold;
-}
-.board{
-    display:grid;
-    grid-template-columns:repeat(6,70px);
-    gap:2px;
-    justify-content:center;
-    margin-top:20px;
-    position:relative;
-    z-index:7;
-}
-.stars{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-    z-index:10;
-    opacity:0.8;
-}
-
-.star{
-    position:absolute;
-    width:3px;
-    height:3px;
-    border-radius:50%;
-    animation: twinkle 2s infinite;
-    opacity:0.7;
-    filter: blur(0.3px);
-}
-
-@keyframes twinkle{
-    0%,100%{
-        opacity:0.2;
-    }
-
-    50%{
-        opacity:1;
-    }
-}
-.cell{
-    width:70px;
-    height:70px;
-    font-size:32px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    border:1px solid #111;
-}
-
-.region0{background:#ef4444;}
-.region1{background:#f97316;}
-.region2{background:#eab308;}
-.region3{background:#22c55e;}
-.region4{background:#3b82f6;}
-.region5{background:#a855f7;}
-
-.valid{
-    outline:3px solid lime;
-}
-
-.invalid{
-    outline:3px solid red;
-}
-.firework{
-    position:fixed;
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    pointer-events:none;
-
-    animation:
-    explode 1.5s ease-out forwards;
-}
-.hint{
-    outline:5px solid gold !important;
-    box-shadow:0 0 20px gold;
-}
-
-#hintBtn{
-    padding:8px 16px;
-    font-size:18px;
-    cursor:pointer;
-    border-radius:8px;
-}
-
-
-@keyframes explode{
-
-    0%{
-        transform:
-        translate(0,0)
-        scale(1);
-        opacity:1;
-    }
-
-    100%{
-        transform:
-        translate(
-            var(--x),
-            var(--y)
-        )
-        scale(0);
-        opacity:0;
-    }
-}
-
-@keyframes zoomIn{
-
-    from{
-        transform:
-        translate(-50%,-50%)
-        scale(0);
-    }
-
-    to{
-        transform:
-        translate(-50%,-50%)
-        scale(1);
-    }
-}
-
-@keyframes fall{
-    0%{
-        transform:translateY(0) rotate(0deg);
-        opacity:1;
-    }
-
-    100%{
-        transform:translateY(100vh) rotate(720deg);
-        opacity:0;
-    }
-}
-
-.win-message{
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    font-size:48px;
-    font-weight:bold;
-    color:goldenrod;
-    text-shadow:
-    0 0 10px rgb(0, 0, 0),
-    0 0 30px rgb(0, 8, 255),
-    0 0 80px rgb(255, 0, 0);
-    animation:pop 1s ease;
-    z-index:10;
-}
-
-@keyframes pop{
-    0%{transform:translate(-50%,-50%) scale(0);}
-    100%{transform:translate(-50%,-50%) scale(1);}
-}
-.shooting-star{
-    position:absolute;
-    width:3px;
-    height:3px;
-    background:white;
-    border-radius:50%;
-    pointer-events:none;
-    z-index:-1;
-
-    box-shadow: 0 0 10px white, 0 0 20px cyan;
-    animation: move 1.2s linear forwards;
-}
-
-@keyframes move{
-    from{
-        transform: translate(0,0);
-        opacity: 1;
-    }
-
-    to{
-        transform: translate(var(--x), var(--y));
-        opacity: 0;
-    }
-}
-
-@keyframes shoot{
-
-    from{
-        transform:
-        translate(0,0)
-        rotate(-25deg);
-
-        opacity:1;
-    }
-
-    to{
-        transform:
-        translate(-500px,500px)
-        rotate(-25deg);
-
-        opacity:0;
-    }
-}
-
-#startBtn{
-    padding:12px 24px;
-    font-size:22px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    background:gold;
-    font-weight:bold;
-    margin:20px;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 <div id="stars" class="stars"></div>
-<h1>✨ Zodiac Queens ✨</h1>
-<h2 id="levelTitle">♈ Aries</h2>
-<div id="timer" style="display:none;">⏱ 00:00</div>
-<button id="hintBtn" style="display:none;">💡 Hint</button>
+<div class="container">
+  <h1>✨ Zodiac Queens ✨</h1>
+  
+  <div id="startScreen" class="start-screen">
+    <button id="startBtn" class="start-btn">▶ Start Game</button>
+    
+    <div class="rules-container">
+      <h3>📜 Core Rules</h3>
+      <ul class="rules-list">
+        <li><strong>One Per Row & Column:</strong> Each row and column must contain exactly one Queen.</li>
+        <li><strong>One Per Color Region:</strong> Every colored territory on the board must contain exactly one Queen.</li>
+        <li><strong>No Touching:</strong> No two Queens can be adjacent—not horizontally, vertically, or diagonally.</li>
+      </ul>
+    </div>
+  </div>
 
-<p>Place one zodiac symbol in every row, column and region.</p>
-<button id="startBtn">▶ Start Game</button>
-<div id="board" class="board"></div>
+  <div id="gameScreen" class="game-screen hidden">
+    <div class="game-header">
+      <h2 id="levelTitle">🔮 Aries</h2>
+      <div id="timer">⏱ 00:00</div>
+    </div>
 
+    <div class="game-wrapper">
+      <div id="board" class="board"></div>
+      <button id="hintBtn" class="hint-btn">💡 Hint</button>
+    </div>
+  </div>
+</div>
 <script src="script.js"></script>
 
 </body>
