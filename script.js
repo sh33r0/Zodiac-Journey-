@@ -156,6 +156,11 @@ const sfx = {
     finalWin: new Audio("sounds/finalWin.mp3")
 };
 
+function play(sound){
+    sound.currentTime = 0;
+    sound.play();
+}
+
 function startTimer(){
 
     clearInterval(timerInterval);
@@ -299,7 +304,7 @@ function drawBoard(){
 }
 
 function toggleCell(r,c){
-
+    console.log("clicked", r, c);
     const prev = board[r][c];
     const next = (prev + 1) % 3;
 
@@ -394,7 +399,7 @@ for(let r=0;r<size;r++){
     }
     else{
     cells.forEach(c => c.classList.add("invalid"));
-    play(sfx.wm);
+    setTimeout(()=>play(sfx.wm), 50);
 }
 }
 
