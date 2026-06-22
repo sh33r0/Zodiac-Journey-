@@ -143,6 +143,19 @@ let board = Array(size)
 
 const gameBoard = document.getElementById("board");
 
+const bg = new Audio("sounds/bg.mp3");
+bg.loop = true;
+bg.volume = 0.4;
+
+const sfx = {
+    wm: new Audio("sounds/wm.mp3"),
+    cross: new Audio("sounds/cross.mp3"),
+    symbol: new Audio("sounds/symbol.mp3"),
+    pop: new Audio("sounds/pop.mp3"),
+    win: new Audio("sounds/win.mp3"),
+    finalWin: new Audio("sounds/finalWin.mp3")
+};
+
 function startTimer(){
 
     clearInterval(timerInterval);
@@ -287,27 +300,31 @@ function drawBoard(){
 
 function toggleCell(r,c){
 
-    board[r][c] =
-    (board[r][c] + 1) % 3;
+    const prev = board[r][c];
+    const next = (prev + 1) % 3;
+
+    board[r][c] = next;
+
+    if(next === 1) play(sfx.cross);
+    else if(next === 2) play(sfx.symbol);
+    else play(sfx.pop);
 
     drawBoard();
 
     if(checkWin()){
+        play(sfx.win);
         stopTimer();
         celebrate();
 
         setTimeout(()=>{
-
             currentLevel++;
 
             if(currentLevel >= zodiacLevels.length){
-
-                alert("🏆 Zodiac Journey Complete!");
+                play(sfx.finalWin);
                 return;
             }
 
             loadLevel(currentLevel);
-
         },2500);
     }
 }
@@ -376,10 +393,9 @@ for(let r=0;r<size;r++){
         );
     }
     else{
-        cells.forEach(
-            c=>c.classList.add("invalid")
-        );
-    }
+    cells.forEach(c => c.classList.add("invalid"));
+    play(sfx.wm);
+}
 }
 
 function validDiagonalCheck(){
@@ -559,3 +575,6 @@ function shootingStarLoop() {
 
 shootingStarLoop();
 loadLevel(0);
+document.addEventListener("click", () => {
+    bg.play();
+}, { once: true });
