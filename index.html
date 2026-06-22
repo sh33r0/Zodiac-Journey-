@@ -225,6 +225,17 @@ h1{
         opacity:0;
     }
 }
+
+#startBtn{
+    padding:12px 24px;
+    font-size:22px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:gold;
+    font-weight:bold;
+    margin:20px;
+}
 </style>
 
 </head>
@@ -233,11 +244,11 @@ h1{
 <div id="stars" class="stars"></div>
 <h1>✨ Zodiac Queens ✨</h1>
 <h2 id="levelTitle">♈ Aries</h2>
-<div id="timer">⏱ 00:00</div>
-<button id="hintBtn">💡 Hint</button>
+<div id="timer" style="display:none;">⏱ 00:00</div>
+<button id="hintBtn" style="display:none;">💡 Hint</button>
 
 <p>Place one zodiac symbol in every row, column and region.</p>
-
+<button id="startBtn">▶ Start Game</button>
 <div id="board" class="board"></div>
 
 <script src="script.js"></script>

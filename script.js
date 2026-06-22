@@ -1,7 +1,9 @@
+let gameStarted = false;
 const size = 6;
 let currentLevel = 0;
 let seconds = 0;
 let timerInterval;
+let musicStarted = false;
 const zodiacLevels = [
 {name:"Aries",symbol:"♈",bg:"#5e1914"},
 {name:"Taurus",symbol:"♉",bg:"#264d26"},
@@ -143,17 +145,17 @@ let board = Array(size)
 
 const gameBoard = document.getElementById("board");
 
-const bg = new Audio("sounds/bg.mp3");
+const bg = new Audio("bg.mp3");
 bg.loop = true;
 bg.volume = 0.4;
 
 const sfx = {
-    wm: new Audio("sounds/wm.mp3"),
-    cross: new Audio("sounds/cross.mp3"),
-    symbol: new Audio("sounds/symbol.mp3"),
-    pop: new Audio("sounds/pop.mp3"),
-    win: new Audio("sounds/win.mp3"),
-    finalWin: new Audio("sounds/finalWin.mp3")
+    wm: new Audio("wm.mp3"),
+    cross: new Audio("cross.mp3"),
+    symbol: new Audio("symbol.mp3"),
+    pop: new Audio("pop.mp3"),
+    win: new Audio("win.mp3"),
+    finalWin: new Audio("finalWin.mp3")
 };
 
 function play(sound){
@@ -265,10 +267,11 @@ function loadLevel(level){
     regions = puzzles[level];
 
     board = Array(size)
-    .fill()
-    .map(() => Array(size).fill(0));
-    startTimer();
-    drawBoard();
+.fill()
+.map(() => Array(size).fill(0));
+
+startTimer();
+drawBoard();
 }
 function drawBoard(){
 
@@ -322,15 +325,108 @@ function toggleCell(r,c){
         celebrate();
 
         setTimeout(()=>{
-            currentLevel++;
 
-            if(currentLevel >= zodiacLevels.length){
-                play(sfx.finalWin);
-                return;
-            }
+    currentLevel++;
 
-            loadLevel(currentLevel);
-        },2500);
+    if(currentLevel >= zodiacLevels.length){
+
+    play(sfx.finalWin);
+
+    const msg = document.createElement("div");
+
+    msg.className = "win-message";
+
+    msg.innerHTML =
+    "🏆 Zodiac Queens Completed! 🏆";
+
+    document.body.appendChild(msg);
+
+    const restartBtn =
+    document.createElement("button");
+
+    restartBtn.innerText =
+    "🔄 Restart Game";
+
+    restartBtn.style.padding =
+    "12px 24px";
+
+    restartBtn.style.fontSize =
+    "22px";
+
+    restartBtn.style.position =
+    "fixed";
+
+    restartBtn.style.top =
+    "65%";
+
+    restartBtn.style.left =
+    "50%";
+
+    restartBtn.style.transform =
+    "translateX(-50%)";
+
+    restartBtn.style.zIndex =
+    "1000";
+
+    document.body.appendChild(restartBtn);
+
+    let fireworkLoop = setInterval(()=>{
+        celebrate();
+    },1000);
+
+    restartBtn.onclick = ()=>{
+
+        clearInterval(fireworkLoop);
+
+        msg.remove();
+        restartBtn.remove();
+
+        currentLevel = 0;
+
+        loadLevel(0);
+    };
+
+    return;
+}
+
+    const nextBtn =
+    document.createElement("button");
+
+    nextBtn.innerText =
+    "➡ Next Level";
+
+    nextBtn.style.padding =
+    "12px 24px";
+
+    nextBtn.style.fontSize =
+    "22px";
+
+    nextBtn.style.position =
+    "fixed";
+
+    nextBtn.style.top =
+    "65%";
+
+    nextBtn.style.left =
+    "50%";
+
+    nextBtn.style.transform =
+    "translateX(-50%)";
+
+    nextBtn.style.zIndex =
+    "1000";
+
+    document.body
+    .appendChild(nextBtn);
+
+    nextBtn.onclick = ()=>{
+
+        nextBtn.remove();
+
+        loadLevel(currentLevel);
+    };
+
+},2500);
     }
 }
 
@@ -503,7 +599,7 @@ function celebrate(){
         "#ffffff"
     ];
 
-    for(let i=0;i<200;i++){
+    for(let i=0;i<80;i++){
 
         const particle =
         document.createElement("div");
@@ -579,7 +675,19 @@ function shootingStarLoop() {
 }
 
 shootingStarLoop();
-loadLevel(0);
+document.getElementById("startBtn").onclick = () => {
+
+    gameStarted = true;
+    musicStarted = true;
+
+    bg.currentTime = 0;
+    bg.play();
+
+    document.getElementById("startBtn").style.display = "none";
+    document.getElementById("hintBtn").style.display = "inline-block";
+    document.getElementById("timer").style.display = "block";
+    loadLevel(0);
+};
 document.addEventListener("click", () => {
     bg.play();
 }, { once: true });
