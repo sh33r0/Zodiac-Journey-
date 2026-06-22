@@ -5,8 +5,8 @@ let seconds = 0;
 let timerInterval;
 let musicStarted = false;
 const zodiacLevels = [
-{name:"Aries",symbol:"♈",bg:"#5e1914"},
-{name:"Taurus",symbol:"♉",bg:"#264d26"},
+{name:"Aries",symbol:"♈",bg:"#264d26"},
+{name:"Taurus",symbol:"♉",bg:"#5e1914"},
 {name:"Gemini",symbol:"♊",bg:"#7a6614"},
 {name:"Cancer",symbol:"♋",bg:"#16385c"},
 {name:"Leo",symbol:"♌",bg:"#6b3b00"},
@@ -265,6 +265,14 @@ function loadLevel(level){
     zodiac.name;
 
     regions = puzzles[level];
+
+    // Update board border and glow to match the current level color
+    const boardEl = document.querySelector('.board');
+    if (boardEl) {
+        boardEl.style.borderColor = zodiac.bg;
+        // add a subtle glow using the same color with transparency
+        boardEl.style.boxShadow = `0 0 30px ${zodiac.bg}55`;
+    }
 
     board = Array(size)
 .fill()
@@ -665,7 +673,9 @@ zodiacLevels[currentLevel].name +
         msg.remove();
     },2500);
 }
+
 createStars();
+
 function shootingStarLoop() {
     createShootingStar();
 
@@ -675,19 +685,30 @@ function shootingStarLoop() {
 }
 
 shootingStarLoop();
+
+// Start button handler
 document.getElementById("startBtn").onclick = () => {
 
     gameStarted = true;
     musicStarted = true;
 
     bg.currentTime = 0;
-    bg.play();
+    bg.play().catch(err => console.log("Audio play error:", err));
 
-    document.getElementById("startBtn").style.display = "none";
+    // Hide start screen and show game screen
+    const btn = document.getElementById("startBtn");
+    if (btn) btn.style.display = "none";
+
+    const startScreen = document.getElementById("startScreen");
+    const gameScreen = document.getElementById("gameScreen");
+    if (startScreen) startScreen.classList.add("hidden");
+    if (gameScreen) gameScreen.classList.remove("hidden");
+    
     document.getElementById("hintBtn").style.display = "inline-block";
     document.getElementById("timer").style.display = "block";
     loadLevel(0);
 };
+
 document.addEventListener("click", () => {
-    bg.play();
+    bg.play().catch(err => console.log("Audio play error:", err));
 }, { once: true });
