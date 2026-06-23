@@ -158,7 +158,11 @@ const sfx = {
     symbol: new Audio("symbol.mp3"),
     pop: new Audio("pop.mp3"),
     win: new Audio("win.mp3"),
-    finalWin: new Audio("finalWin.mp3")
+    finalWin: new Audio("finalWin.mp3"),
+    start: new Audio("start.mp3"),
+    reset: new Audio("reset.mp3"),
+    restart: new Audio("restart.mp3"),
+    hint: new Audio("hint.mp3")
 };
 
 function play(sound){
@@ -394,6 +398,8 @@ function toggleCell(r,c){
     if(currentLevel >= zodiacLevels.length){
 
     play(sfx.finalWin);
+    bg.pause();
+    bg.currentTime = 0;
     document.querySelector("h1").style.display = "none";
     document.getElementById("levelTitle").style.display = "none";
     document.getElementById("timer").style.display = "none";
@@ -445,7 +451,7 @@ function toggleCell(r,c){
     },1000);
 
     restartBtn.onclick = ()=>{
-
+        play(sfx.restart);
     clearInterval(fireworkLoop);
 
     msg.remove();
@@ -461,8 +467,13 @@ function toggleCell(r,c){
 
     buildScoreTable();
 
+    document.querySelector("h1").style.display = "block";
+    document.getElementById("levelTitle").style.display = "block";
+    document.getElementById("timer").style.display = "block";
+    document.getElementById("board").style.display = "grid";
+    document.getElementById("hintBtn").style.display = "inline-block";
+    document.getElementById("resetBtn").style.display = "inline-block";
     currentLevel = 0;
-
     loadLevel(0);
 };
 
@@ -760,7 +771,7 @@ shootingStarLoop();
 
 // Start button handler
 document.getElementById("startBtn").onclick = () => {
-
+    play(sfx.start);
     gameStarted = true;
     musicStarted = true;
 
@@ -787,10 +798,14 @@ document.addEventListener("click", () => {
     bg.play().catch(err => console.log("Audio play error:", err));
 }, { once: true });
 document.getElementById("resetBtn").onclick = ()=>{
-
+play(sfx.reset);
     board = Array(size)
     .fill()
     .map(()=>Array(size).fill(0));
 
     drawBoard();
+    document.getElementById("hintBtn").onclick = ()=>{
+
+    play(sfx.hint);
+};
 };
