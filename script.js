@@ -162,7 +162,8 @@ const sfx = {
     start: new Audio("start.mp3"),
     reset: new Audio("reset.mp3"),
     restart: new Audio("restart.mp3"),
-    hint: new Audio("hint.mp3")
+    hint: new Audio("hint.mp3"),
+    nextLevel: new Audio("nextLevel.mp3")
 };
 
 function play(sound){
@@ -512,10 +513,12 @@ function toggleCell(r,c){
 
     nextBtn.onclick = ()=>{
 
-        nextBtn.remove();
+    play(sfx.nextLevel);
 
-        loadLevel(currentLevel);
-    };
+    nextBtn.remove();
+
+    loadLevel(currentLevel);
+};
 
 },2500);
     }
