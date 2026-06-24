@@ -9,10 +9,10 @@ A colorful browser puzzle game where players place one Queen per row, column, an
  - **Hints & Reset:** hint button and reset to help players while solving puzzles.
  - **Accessible UI:** keyboard + mouse friendly controls and clear visual feedback.
 
-## 🌐 Live Demo
+## 🌐 Live Demo 
 
 ### Try It Out
-
+- [Live Link](https://shyama-shree-pati.github.io/Zodiac-Journey-/) OR
 - Open `index.html` in a browser to play locally.
 
 ## 🛠️ Tech Stack
