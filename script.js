@@ -418,33 +418,9 @@ function toggleCell(r,c){
 
     document.body.appendChild(msg);
 
-    const restartBtn =
-    document.createElement("button");
-
-    restartBtn.innerText =
-    "🔄 Restart Game";
-
-    restartBtn.style.padding =
-    "12px 24px";
-
-    restartBtn.style.fontSize =
-    "22px";
-
-    restartBtn.style.position =
-    "fixed";
-
-    restartBtn.style.top =
-    "80%";
-
-    restartBtn.style.left =
-    "50%";
-
-    restartBtn.style.transform =
-    "translateX(-50%)";
-
-    restartBtn.style.zIndex =
-    "1000";
-
+    const restartBtn = document.createElement("button");
+    restartBtn.classList.add("primary-btn", "restart-btn");
+    restartBtn.innerText = "🔄 Restart Game";
     document.body.appendChild(restartBtn);
 
     let fireworkLoop = setInterval(()=>{
@@ -481,35 +457,11 @@ function toggleCell(r,c){
     return;
 }
 
-    const nextBtn =
-    document.createElement("button");
+    const nextBtn = document.createElement("button");
+    nextBtn.classList.add("next-btn");
+    nextBtn.innerText = "➡ Next Level";
 
-    nextBtn.innerText =
-    "➡ Next Level";
-
-    nextBtn.style.padding =
-    "12px 24px";
-
-    nextBtn.style.fontSize =
-    "22px";
-
-    nextBtn.style.position =
-    "fixed";
-
-    nextBtn.style.top =
-    "65%";
-
-    nextBtn.style.left =
-    "50%";
-
-    nextBtn.style.transform =
-    "translateX(-50%)";
-
-    nextBtn.style.zIndex =
-    "1000";
-
-    document.body
-    .appendChild(nextBtn);
+    document.body.appendChild(nextBtn);
 
     nextBtn.onclick = ()=>{
 

@@ -119,6 +119,56 @@ h1 {
     transform: scale(1.05);
 }
 
+.next-btn {
+    position: fixed;
+    top: 65%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    font-size: 22px;
+    background: linear-gradient(135deg, #1e40af, #4d248f);
+    color: #01d428;
+    border: 2px solid #60a5fa;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 0 15px rgba(96, 165, 250, 0.5);
+    z-index: 1000;
+}
+
+.next-btn:hover {
+    background: linear-gradient(135deg, #1e3a8a, #471eaf);
+    box-shadow: 0 0 25px rgba(96, 165, 250, 0.8);
+    transform: translateX(-50%) scale(1.05);
+}
+
+/* Restart Game button visuals and positioning (moved from inline styles) */
+.restart-btn {
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    font-size: 22px;
+    background: linear-gradient(135deg, #24d5b5,#324a9c);
+    color: rgb(40, 19, 161);
+    border: 2px solid #60a5fa;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 0 15px rgba(96, 165, 250, 0.5);
+    z-index: 1000;
+}
+
+.restart-btn:hover {
+    background: linear-gradient(135deg, #1e3a8a, #1e40af);
+    box-shadow: 0 0 25px rgba(96, 165, 250, 0.8);
+    transform: translateX(-50%) scale(1.05);
+    color: white;
+}
+
 .start-btn {
     padding: 15px 40px;
     font-size: 18px;
@@ -419,10 +469,16 @@ h1 {
 #resetBtn{
     padding:8px 16px;
     font-size:18px;
-    border-radius:30px;
-    cursor:pointer;
-    background:#7c2d12;
-    color:white;
-    border:none;
-    display:none;
+    background: transparent;
+    color: white;
+    border: 2px solid #60a5fa;
+    border-radius: 80px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 0 15px rgba(96, 165, 250, 0.5);
+}
+#resetBtn:hover {
+    box-shadow: 0 0 25px rgba(96, 165, 250, 0.8);
+    transform: scale(1.05);
 }
