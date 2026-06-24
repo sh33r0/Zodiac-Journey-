@@ -1,4 +1,4 @@
-# Zodiac-Journey - Zodiac Queens
+# Zodiac Queens
 
 A colorful browser puzzle game where players place one Queen per row, column, and colored region without adjacency — themed around the Zodiac.
 
@@ -41,7 +41,7 @@ A colorful browser puzzle game where players place one Queen per row, column, an
 
 1. **Clone the repository**
 	```bash
-	git clone https://github.com/<your-user>/Zodiac-Journey.git
+	git clone https://github.com/Shyama-Shree-Pati/Zodiac-Journey.git
 	cd Zodiac-Journey
 	```
 2. **Open locally** — simplest options:
@@ -79,7 +79,7 @@ A colorful browser puzzle game where players place one Queen per row, column, an
 
 **Made with ❤️ and starlight.**
 
-[Report Bug](https://github.com/<your-user>/Zodiac-Journey/issues) · [Request Feature](https://github.com/<your-user>/Zodiac-Journey/issues)
+[Report Bug](https://github.com/Shyama-Shree-Pati/Zodiac-Journey/issues) · [Request Feature](https://github.com/Shyama-Shree-Pati>/Zodiac-Journey/issues)
 
 </div>
 <div align="center">  <sub>© 2026 Zodiac-Journey. All rights reserved.</sub> </div>
